@@ -1,0 +1,46 @@
+{
+	"name": "Ubuntu - Install All Cluster",
+	"build": {
+		"dockerfile": "Dockerfile",
+		// Update 'VARIANT' to pick an Ubuntu version: jammy / ubuntu-22.04, focal / ubuntu-20.04, bionic /ubuntu-18.04
+		// Use ubuntu-22.04 or ubuntu-18.04 on local arm64/Apple Silicon.
+		"args": { "VARIANT": "focal" }
+	},
+
+	"customizations": {
+    // Configure properties specific to VS Code.
+    "vscode": {
+      // Add the IDs of extensions you want installed when the container is created.
+      "extensions": [
+        "GitHub.vscode-pull-request-github",
+        "mhutchie.git-graph"
+      ],
+      "settings": {
+        // Configure settings to be overridden for the dockercompose language.
+        "editor.tabSize": 2,
+
+        // Specifies the color theme used in the workbench.
+        "workbench.colorTheme": "Default Dark+ Experimental",
+
+        // When enabled, will trim trailing whitespace when saving a file.
+        "files.trimTrailingWhitespace": true,
+
+        // Controls how lines should wrap.
+        //  - off: Lines will never wrap.
+        //  - on: Lines will wrap at the viewport width.
+        //  - wordWrapColumn: Lines will wrap at `editor.wordWrapColumn`.
+        //  - bounded: Lines will wrap at the minimum of viewport and `editor.wordWrapColumn`.
+        "editor.wordWrap": "on"
+      }
+    }
+  },
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "sh .devcontainer/start/start.sh",
+
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode"
+}
